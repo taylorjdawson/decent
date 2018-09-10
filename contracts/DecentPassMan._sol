@@ -1,0 +1,72 @@
+pragma solidity ^0.4.23;
+
+import "./ENSInterface.sol";
+import "./SubdomainRegistrar.sol";
+
+/// @title A simulator for Bug Bunny, the most famous Rabbit
+/// @author Warned Bros
+/// @notice You can use this contract for only the most basic simulation
+/// @dev All function calls are currently implement without side effects
+contract DecentPassMan {
+
+  ENS ens;
+  address registrar;
+
+  /// TODO: Fill in
+  modifier only_owner(bytes32 node) {
+    require(ens.owner(node) == msg.sender);
+    _;
+  }
+
+  /// @notice TODO: Explain to a user what a function does
+  /// @dev TODO: Explain to a developer any extra details
+  /// @param
+  /// @return
+  function DecentPassMan(address ensAddress, address subDomainRegistrarAddress) {
+    ens = ENS(ensAddress);
+    registrar = subDomainRegistrarAddress;
+  }
+
+  /// @dev TODO: FILL-IN
+
+
+  /// @dev Creates a mapping of User structs
+  /// This is used to manage user data
+  //mapping(bytes32 => User) public users;
+
+  /** @notice Registers a new user to the system with the location their
+    * password data is stored
+    * @dev Adds the user to the map of users
+    *
+    * @param namehash of username
+    * @return
+    */
+  function registerUser(bytes32 username, bytes32 x, bytes32 y, bytes32 passDataIpfs) public returns (bool){
+    // Preconditions: Username is available. Password is 'sufficient' (entropy, randomness)
+    registrar.register(username, msg.sender, x, y, ipfsHash);
+  }
+
+  /// @notice TODO: Explain to a user what a function does
+  /// @dev TODO: Explain to a developer any extra details
+  /// @param
+  /// @return
+  function deregisterUser() only_owner(msg.sender) {
+    registrar
+  }
+
+  /// @notice TODO: Explain to a user what a function does
+  /// @dev TODO: Explain to a developer any extra details
+  /// @param user
+  /// @return bytes32 the datahash
+  function getDataHash(address user) only_owner public returns (bytes32){
+    // Code here
+  }
+
+  /// @notice TODO: Explain to a user what a function does
+  /// @dev TODO: Explain to a developer any extra details
+  /// @return
+  function updateDataHash() only_owner returns (){
+    // Code here
+  }
+
+}
